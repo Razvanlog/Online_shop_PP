@@ -1,6 +1,6 @@
-#ifndef USER_H_INCLUDED
-#define USER_H_INCLUDED
-
+//#ifndef USER_H
+//#define USER_H
+#pragma once
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -13,10 +13,9 @@ struct user{
     struct order cart;
 };
 struct user create_user(char*,char*,int);
-void add_user(struct dbl*,struct user);
+short add_user(struct dbl*,struct user);
 short remove_user(struct dbl*,struct user);
 struct node*query_user(struct dbl*,struct user);
 void print_users(struct dbl*);
 short check_credentials(struct dbl*,char*,char*,struct user*);
 //#endif
-#endif // USER_H_INCLUDED
