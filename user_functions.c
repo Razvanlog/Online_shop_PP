@@ -9,8 +9,8 @@ void create_account(struct dbl*l){
     user[strlen(user)-1]='\0';
     surname[strlen(surname)-1]='\0';
     struct user a=create_user(user,surname,1);
-    add_user(l,a);
-    printf("succesfully created account!\n");
+    if (!add_user(l,a))
+        printf("succesfully created account!\n");
     return;
 }
 
@@ -149,7 +149,10 @@ void sell_prod(struct dbl*storage){
     return;
 }
 void user_help(){
-    printf("add product - add a product to your shopping cart\nremove product - remove a product from your shopping cart\nplace order - place the order with the items from your shopping cart\nprint cart - print the items in your shopping cart\nprint orders - print all placed orders\nexit - quit the program\nlog out - log out of the accout\nquery n - display all products which contain the a word\nquery pr - display all products which are in a price range\nquery npr - display all products which contain a word and are in a price range\nsell product - sell a product on Remag\n\n");
+    printf("add product - add a product to your shopping cart\nremove product - remove a product from your shopping cart\nplace order - place the order with the items from your shopping cart\nprint all - print all the products available\nprint cart - print the items in your shopping cart\nprint orders - print all placed orders\nexit - quit the program\nlog out - log out of the accout\nquery n - display all products which contain the a word\nquery pr - display all products which are in a price range\nquery npr - display all products which contain a word and are in a price range\nsell product - sell a product on Remag\n\n");
+}
+void print_all(struct dbl*l){
+    print_products(l);
 }
 int user_command_recog(char*command){
     if (!strcmp(command,"place order\n"))
@@ -176,5 +179,7 @@ int user_command_recog(char*command){
         return 9;
     if (!strcmp(command,"print orders\n")) //print orders - print all placed orders
         return 12;
+    if (!strcmp(command,"print all\n"))
+        return 13;
     return 0;
 }
