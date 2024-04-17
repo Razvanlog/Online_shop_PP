@@ -79,7 +79,7 @@ int main(int argc,char **argv){
             }
             //break;
         }
-        //system("cls");
+        system("cls");
         if (connected)
             state=1;
         if (current_user.rights==0){
@@ -191,7 +191,7 @@ int main(int argc,char **argv){
         }
     }
     }
-    //system("cls");
+    system("cls");
     //stdin.clear();
     }
     save_storage(__FILE__,&product_list);
