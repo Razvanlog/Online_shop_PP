@@ -1,7 +1,4 @@
-#ifndef USER_FUNCTIONS_H_INCLUDED
-#define USER_FUNCTIONS_H_INCLUDED
-
-
+#pragma once
 #include <stdlib.h>
 #include <stdio.h>
 #include "user.h"
@@ -19,4 +16,4 @@ void print_orders(struct user*user);
 void sell_prod(struct dbl*storage);
 void user_help();
 int user_command_recog(char*command);
-#endif // USER_FUNCTIONS_H_INCLUDED
+void print_all(struct dbl*);
