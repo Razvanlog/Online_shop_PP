@@ -74,6 +74,10 @@ int main(int argc,char **argv){
             user[strlen(user)-1]='\0';
             surname[strlen(surname)-1]='\0';
             connected=check_credentials(&user_list,user,surname,&current_user);
+            if (!connected){
+                printf("try again\n");
+            }
+            //break;
         }
         system("cls");
         if (connected)
@@ -185,6 +189,7 @@ int main(int argc,char **argv){
     }
     }
     system("cls");
+    //stdin.clear();
     }
     save_storage(__FILE__,&product_list);
     save_users(__FILE__,&user_list);
