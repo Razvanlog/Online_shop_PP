@@ -13,12 +13,18 @@ struct user create_user(char*name,char*surname,int rights){
     a.n_orders=0;
     return a;
 }
-void add_user(struct dbl*l,struct user a){
+short add_user(struct dbl*l,struct user a){
     struct node*p=(struct node*)malloc(sizeof(struct node));
     struct user *copy=(struct user*)malloc(sizeof(struct user));
     *copy=a;
     *p=create_node((void*)(copy));
-    push_back(l,p);
+    if (query_user(l,a)==NULL)
+    {
+        push_back(l,p);
+        return 0;
+    }
+    else printf("this account is already created\n");
+    return 1;
 }
 short remove_user(struct dbl*l,struct user a){
     struct node*it=l->first;
@@ -38,7 +44,10 @@ short remove_user(struct dbl*l,struct user a){
 struct node*query_user(struct dbl*l,struct user a){
     struct node*it=l->first;
     int poz=0;
-    struct user*p=(struct user*)(it->val);
+    struct user*p;
+    if (it!=NULL)
+    p=(struct user*)(it->val);
+    else return NULL;
     //printf("%s",p->surname);
     //print_users(l);
     while (it!=NULL && strcmp(a.name,((struct user*)(it->val))->name)&& strcmp(a.surname,((struct user*)(it->val))->surname)){
