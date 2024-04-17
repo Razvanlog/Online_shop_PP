@@ -83,9 +83,9 @@ int main(int argc,char **argv){
         if (connected)
             state=1;
         if (current_user.rights==0){
-            printf("welcome admin!\ntype help to learn more about the available commands\n\n");
+            printf("Hello admin!\ntype help to learn more about the available commands\n\n");
         }
-        else printf("welcome %s!\ntype help to learn more about the available commands\n\n",current_user.name);
+        else printf("Hello %s!\ntype help to learn more about the available commands\n\n",current_user.name);
         while (state && run){
             if (state==1){
             char *command;
