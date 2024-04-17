@@ -79,7 +79,7 @@ int main(int argc,char **argv){
             }
             //break;
         }
-        system("cls");
+        //system("cls");
         if (connected)
             state=1;
         if (current_user.rights==0){
@@ -180,6 +180,9 @@ int main(int argc,char **argv){
                     case 12:
                     print_orders(&current_user);
                     break;
+                    case 13:
+                    print_all(&product_list);
+                    break;
                     default:
                     printf("command not recognized\n");
                     break;
@@ -188,7 +191,7 @@ int main(int argc,char **argv){
         }
     }
     }
-    system("cls");
+    //system("cls");
     //stdin.clear();
     }
     save_storage(__FILE__,&product_list);
