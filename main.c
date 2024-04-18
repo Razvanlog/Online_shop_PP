@@ -17,15 +17,18 @@ int main(int argc,char **argv){
     int connected=0,run=1;
     //printf("ok");
     create_ps_file(__FILE__,&product_list);
-    //printf("ok");
+    //printf("ok\n");
     create_user_file(__FILE__,&user_list);
+   // printf("ok\n");
     create_orders_file(__FILE__,&user_list);
+   // printf("ok\n");
     int state=1;
     char*user,*surname,*create_user;
-    user=(char*)malloc(sizeof(char)*100);
-    surname=(char*)malloc(sizeof(char)*100);
-    create_user=(char*)malloc(sizeof(char)*100);
-    //printf("%d\n",argc);
+    user=(char*)malloc(sizeof(char)*26);
+    surname=(char*)malloc(sizeof(char)*26);
+    create_user=(char*)malloc(sizeof(char)*26);
+    //if (user==NULL || surname==NULL || create_user==NULL)
+    //printf("null");
     if (argc==1){
        // printf("one argument");
     }
@@ -48,7 +51,7 @@ int main(int argc,char **argv){
         }
         while (!connected && run){
             printf("Remag:");
-            fgets(create_user,100,stdin);
+            fgets(create_user,25,stdin);
             create_user[strlen(create_user)-1]='\0';
             if (!strcmp(create_user,"create account")){
                 create_account(&user_list);
@@ -63,14 +66,15 @@ int main(int argc,char **argv){
                 connected=0;
                 break;
             }
+            else printf("command unrecognized!\n");
         }
         //system("clear");
         if (run){
         while (!connected){
             printf("user:");
-            fgets(user,100,stdin);
+            fgets(user,25,stdin);
             printf("surname:");
-            fgets(surname,100,stdin);
+            fgets(surname,25,stdin);
             user[strlen(user)-1]='\0';
             surname[strlen(surname)-1]='\0';
             connected=check_credentials(&user_list,user,surname,&current_user);
@@ -79,7 +83,9 @@ int main(int argc,char **argv){
             }
             //break;
         }
+        //printf("ok");
         system("cls");
+        //printf("ok");
         if (connected)
             state=1;
         if (current_user.rights==0){
@@ -89,9 +95,9 @@ int main(int argc,char **argv){
         while (state && run){
             if (state==1){
             char *command;
-            command=(char*)malloc(sizeof(char)*101);
+            command=(char*)malloc(sizeof(char)*26);
             printf("%s:",current_user.name);
-            fgets(command,101,stdin);
+            fgets(command,25,stdin);
             if (current_user.rights==0){
             int type=admin_command_recog(command);
             switch(type){
@@ -188,6 +194,7 @@ int main(int argc,char **argv){
                     break;
                 }
             }
+            free(command);
         }
     }
     }
