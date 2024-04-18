@@ -4,7 +4,8 @@
 void create_ps_file(char *cur_file_name,struct dbl *product_list){
     FILE *f;
     *product_list=create_list();
-    char *file_name=(char*)malloc(sizeof(char)*100000);
+    char *file_name=(char*)malloc(sizeof(char)*100);
+    //printf("succes file_name creation\n");
     strcpy(file_name,cur_file_name);
     file_name[strlen(file_name)-6]='\0';
     strcpy(file_name+strlen(file_name),"products.csv");
@@ -16,12 +17,13 @@ void create_ps_file(char *cur_file_name,struct dbl *product_list){
         fclose(f);
     }
     else{
-        char*input=(char*)malloc(sizeof(char)*1000);
-        fgets(input,101,f);
-        while (fgets(input,101,f)!=NULL){
+        char*input=(char*)malloc(sizeof(char)*71);
+        char *c=(char*)malloc(sizeof(char)*51);
+        fgets(input,70,f);
+        while (fgets(input,70,f)!=NULL){
+            //printf("succesfully read input\n");
             char*it=strtok(input,",");
             struct product a;
-            char *c=(char*)malloc(sizeof(char)*1001);
             strcpy(c,it);
             it=strtok(NULL,",");
             int q=0;
@@ -41,16 +43,19 @@ void create_ps_file(char *cur_file_name,struct dbl *product_list){
                 power=power/10;
             }
             a=create_product(c,q,p);
-            free(c);
+            //printf("%s\n",a.name);
             add_product(product_list,a);
+            //printf("ok\n");
         }
+        free(c);
         free(input);
         fclose(f);
     }
-    free(file_name);
+    //if (file_name!=NULL);
+    //free(file_name);
 }
 void save_storage(char*cur_file_name,struct dbl*l){
-    char *filename=(char*)malloc(sizeof(char)*10001);
+    char *filename=(char*)malloc(sizeof(char)*101);
     strcpy(filename,cur_file_name);
     filename[strlen(filename)-6]='\0';
     strcpy(filename+strlen(filename),"products.csv");
@@ -69,13 +74,13 @@ void save_storage(char*cur_file_name,struct dbl*l){
     else {
         fprintf(f,"name,quantity,price\n");
     }
-    free(filename);
+    //free(filename);
     fclose(f);
 }
 void create_user_file(char *cur_file_name,struct dbl *user_list){
     FILE *f;
     *user_list=create_list();
-    char *file_name=(char*)malloc(sizeof(char)*100000);
+    char *file_name=(char*)malloc(sizeof(char)*50);
     strcpy(file_name,cur_file_name);
     file_name[strlen(file_name)-6]='\0';
     strcpy(file_name+strlen(file_name),"users.csv");
@@ -90,11 +95,11 @@ void create_user_file(char *cur_file_name,struct dbl *user_list){
         save_users(cur_file_name,user_list);
     }
     else{
-        char*input=(char*)malloc(sizeof(char)*1000);
-        fgets(input,101,f);
-        while (fgets(input,101,f)!=NULL){
+        char*input=(char*)malloc(sizeof(char)*51);
+        char*surname=(char*)malloc(sizeof(char)*25),*user=(char*)malloc(sizeof(char)*25);
+        fgets(input,50,f);
+        while (fgets(input,50,f)!=NULL){
             char*it=strtok(input,",");
-            char*surname=(char*)malloc(sizeof(char)*100),*user=(char*)malloc(sizeof(char)*100);
             int rights=0;
             strcpy(user,it);
             it=strtok(NULL,",");
@@ -134,13 +139,16 @@ void create_user_file(char *cur_file_name,struct dbl *user_list){
             add_product(product_list,a);*/
         }
         //print_users(user_list);
+        free(user);
+        free(surname);
         free(input);
-        free(file_name);
+        //if (file_name!=NULL);
+        //free(file_name);
         fclose(f);
     }
 }
 void save_users(char*cur_file_name,struct dbl*l){
-    char *filename=(char*)malloc(sizeof(char)*10001);
+    char *filename=(char*)malloc(sizeof(char)*101);
     strcpy(filename,cur_file_name);
     filename[strlen(filename)-6]='\0';
     strcpy(filename+strlen(filename),"users.csv");
@@ -159,13 +167,13 @@ void save_users(char*cur_file_name,struct dbl*l){
     else {
         fprintf(f,"name,surname,rights\n");
     }
-    free(filename);
+    //free(filename);
     fclose(f);
 }
 void create_orders_file(char *cur_file_name,struct dbl *user_list){
     FILE *f;
     //*user_list=create_list();
-    char *file_name=(char*)malloc(sizeof(char)*100000);
+    char *file_name=(char*)malloc(sizeof(char)*100);
     strcpy(file_name,cur_file_name);
     file_name[strlen(file_name)-6]='\0';
     strcpy(file_name+strlen(file_name),"orders.csv");
@@ -177,12 +185,12 @@ void create_orders_file(char *cur_file_name,struct dbl *user_list){
         fclose(f);
     }
     else{
-        char*input=(char*)malloc(sizeof(char)*1000000);
-        fgets(input,100001,f);
-        while (fgets(input,100001,f)!=NULL){
-            char*it=strtok(input,",");
-            char*nr_items_c=(char*)malloc(sizeof(char)*100),*user=(char*)malloc(sizeof(char)*100),*surname=(char*)malloc(sizeof(char)*100);
-            char *code=(char*)malloc(sizeof(char)*13);
+        char*input=(char*)malloc(sizeof(char)*301);
+        fgets(input,300,f);
+        char*nr_items_c=(char*)malloc(sizeof(char)*100),*user=(char*)malloc(sizeof(char)*100),*surname=(char*)malloc(sizeof(char)*100);
+        char *code=(char*)malloc(sizeof(char)*13);
+        while (fgets(input,300,f)!=NULL){
+            char*it=strtok(input,",");    
             int nr=0;
             strcpy(user,it);
             it=strtok(NULL,",");
@@ -197,13 +205,13 @@ void create_orders_file(char *cur_file_name,struct dbl *user_list){
             //printf("%s %s\n",user,surname);
             struct order *cur_order=(struct order*)malloc(sizeof(struct order));
             *cur_order=create_order();
-            cur_order->code=code;
+            strcpy(cur_order->code,code);
            // printf("%d\n",nr);
+            char *c=(char*)malloc(sizeof(char)*41);
             for (int j=0; j<nr; j++){
                 //printf("%d\n",j);
                 char*it=strtok(NULL,",");
                 struct product a;
-                char *c=(char*)malloc(sizeof(char)*1001);
                 strcpy(c,it);
                 it=strtok(NULL,",");
                 int q=0;
@@ -226,6 +234,7 @@ void create_orders_file(char *cur_file_name,struct dbl *user_list){
                 add_product(&(cur_order->products),a);
                 cur_order->total_price+=a.price*a.quantity;
             }
+            free(c);
             //print_products(&(cur_order->products));
             struct node*node_account_details=query_user(user_list,create_user(user,surname,0));
             struct user *account_details=((struct user*)(node_account_details->val));
@@ -241,52 +250,19 @@ void create_orders_file(char *cur_file_name,struct dbl *user_list){
                 //print_orders(account_details);
                 //account_details->n_orders++;
             }
-            //account_details->n_orders--;
-            /*int rights=0;
-            strcpy(user,it);
-            it=strtok(NULL,",");
-            //strcpy(surname,it);
-            it=strtok(NULL,",");
-            //printf("%s\n",it);
-            for (int i=0; i<strlen(it)-1; i++){
-                rights=rights*10+it[i]-'0';
-            }
-            struct user a;
-            a=create_user(user,surname,rights);
-            add_user(user_list,a);
-            //free(user);
-            //free(surname);
-            /*char*it=strtok(input,",");
-            struct product a;
-            char *c=(char*)malloc(sizeof(char)*1001);
-            strcpy(c,it);
-            it=strtok(NULL,",");
-            int q=0;
-            for (int i=0; i<strlen(it); i++){
-                q=q*10+it[i]-'0';
-            }
-            it=strtok(NULL,",");
-            float p=0;
-            int i=0;
-            for (i=0;  it[i]!='.' && i<strlen(it); i++){
-                p=p*10+it[i]-'0';
-            }
-            float power=1/10;
-            i=i+1;
-            for (int i; i<strlen(it); i++){
-                p=p+(float)(((float)it[i]-'0'))*power;
-                power=power/10;
-            }
-            a=create_product(c,q,p);
-            add_product(product_list,a);*/
         }
+        free(code);
+        free(user);
+        free(nr_items_c);
+        free(surname);
         free(input);
-        free(file_name);
+        //if (file_name!=NULL);
+        //free(file_name);
         fclose(f);
     }
 }
 void save_orders(char*cur_file_name,struct dbl*l){
-    char *filename=(char*)malloc(sizeof(char)*10001);
+    char *filename=(char*)malloc(sizeof(char)*101);
     strcpy(filename,cur_file_name);
     filename[strlen(filename)-6]='\0';
     strcpy(filename+strlen(filename),"orders.csv");
@@ -328,7 +304,7 @@ void save_orders(char*cur_file_name,struct dbl*l){
         }
         it=it->next;
     }
-    free(filename);
+    //free(filename);
     fclose(f);
     }
 }
